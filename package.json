@@ -1,0 +1,64 @@
+{
+  "name": "cordova-plugin-payabbhi",
+  "version": "1.0.1",
+  "description": "Payabbhi plugin for cordova/ionic",
+  "scripts": {
+    "release": "node scripts/release"
+  },
+  "cordova": {
+    "id": "cordova-plugin-payabbhi",
+    "platforms": [
+      "android",
+      "ios",
+      "browser"
+    ]
+  },
+  "payabbhi": {
+    "org": "payabbhi",
+    "deps": {
+      "android": {
+        "version": "1.0.5"
+      },
+      "ios": {
+        "url": "https://github.com/payabbhi/payabbhi-ios/releases",
+        "version": "1.0.1",
+        "xcodeVersion": "93"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/payabbhi/cordova-plugin-payabbhi"
+  },
+  "keywords": [
+    "payabbhi",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova",
+    "phonegap",
+    "ionic",
+    "android",
+    "ios",
+    "payments",
+    "cordova-plugin"
+  ],
+  "author": "Payabbhi <support@payabbhi.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/payabbhi/cordova-plugin-payabbhi/issues"
+  },
+  "homepage": "https://github.com/payabbhi/cordova-plugin-payabbhi#readme",
+  "devDependencies": {
+    "@octokit/rest": "^15.13.1",
+    "commander": "^2.18.0",
+    "download": "^7.1.0",
+    "ejs": "^2.6.1",
+    "isomorphic-git": "^0.37.1",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "replace-in-file": "^3.4.2",
+    "rmdir-promise": "^1.0.0",
+    "tar": "^4.4.6"
+  }
+}

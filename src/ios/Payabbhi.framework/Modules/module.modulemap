@@ -1,0 +1,11 @@
+framework module Payabbhi {
+  umbrella header "Payabbhi.h"
+
+  export *
+  module * { export * }
+}
+
+module Payabbhi.Swift {
+    header "Payabbhi-Swift.h"
+    requires objc
+}

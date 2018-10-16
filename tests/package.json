@@ -1,0 +1,11 @@
+{
+  "name": "cordova-plugin-payabbhi-tests",
+  "version": "1.0.0",
+  "description": "payabbhi cordova plugin tests",
+  "cordova": {
+    "id": "cordova-plugin-payabbhi-tests"
+  },
+  "keywords": ["ecosystem:cordova"],
+  "author": "Payabbhi Team",
+  "license": "MIT"
+}

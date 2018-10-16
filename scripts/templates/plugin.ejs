@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="<%= plugin.cordova.id %>" 
+        version="<%= plugin.version %>" 
+        xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name><%= plugin.name %></name>
+    <description><%= plugin.description %></description>
+    <keywords><%= plugin.keywords.join(',') %></keywords>
+
+    <js-module name="PayabbhiCheckout" src="www/PayabbhiCheckout.js">
+        <clobbers target="PayabbhiCheckout" />
+    </js-module>
+
+
+
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="PayabbhiCheckout">
+                <param name="android-package" value="com.payabbhi.cordova.PayabbhiCheckout" />
+            </feature>
+        </config-file>
+        <framework src="com.payabbhi:payabbhi-android:<%= plugin.payabbhi.deps.android.version %>" />
+        <source-file src="src/android/PayabbhiCheckout.java" target-dir="src/com/payabbhi/cordova/" />
+    </platform>
+
+
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="PayabbhiCheckout">
+                <param name="ios-package" value="PayabbhiCheckout" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/PayabbhiCheckout.swift" />
+
+        <!-- Payabbhi iOS SDK version <%= plugin.payabbhi.deps.ios.version %> for XCode Version <%= plugin.payabbhi.deps.ios.xcodeVersion %>-->
+        <framework src="src/ios/Payabbhi.framework" custom="true" embed="true"/>
+        <dependency id="cordova-plugin-add-swift-support" version="1.7.2"/>
+    </platform>
+
+
+
+    <platform name="browser">
+        <config-file parent="/*" target="config.xml">
+          <feature name="PayabbhiCheckout">
+            <param name="browser-package" value="PayabbhiCheckout" />
+          </feature>
+        </config-file>
+        <js-module src="src/browser/PayabbhiProxy.js" name="PayabbhiProxy">
+          <runs />
+        </js-module>
+  </platform>
+
+
+</plugin>

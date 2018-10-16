@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+            var formCheckoutURL, createCheckoutParams, openCheckout;
+            
+            formCheckoutURL = function (checkoutURL) {
+                var script = document.createElement("script");
+                script.setAttribute("type", "text/javascript");
+                script.setAttribute("src", checkoutURL);
+                document.head.appendChild(script);
+            };
+        
+            createCheckoutParams = function (options, message) {
+                
+                var params = JSON.parse(window.atob(options));
+                params.handler = function(response){};
+                params.modal = {};
+                params.modal.ondismiss = function () {
+                    return webkit.messageHandlers.ondismissHandler.postMessage(message);
+                };
+            
+                return params;
+            };
+        
+            openCheckout = function (options, message){
+                var checkoutParams = createCheckoutParams(options, message);
+            
+                if (typeof(Payabbhi) === "undefined") {
+                    return webkit.messageHandlers.errorHandler.postMessage({errorType: "network_error", errorMessage:"Connection not found"});
+                }
+                window.payabbhi = new Payabbhi(checkoutParams);
+                window.payabbhi.open();
+            };
+        </script>
+    </body>
+</html>
