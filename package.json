@@ -17,7 +17,7 @@
     "org": "payabbhi",
     "deps": {
       "android": {
-        "version": "1.0.5"
+        "version": "1.0.6"
       },
       "ios": {
         "url": "https://github.com/payabbhi/payabbhi-ios/releases",
