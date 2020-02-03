@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-payabbhi"
-        version="1.0.3"
-        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+<plugin id="cordova-plugin-payabbhi" 
+        version="1.0.4" 
+        xmlns="http://apache.org/cordova/ns/plugins/1.0" 
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <name>cordova-plugin-payabbhi</name>
@@ -20,7 +20,7 @@
                 <param name="android-package" value="com.payabbhi.cordova.PayabbhiCheckout" />
             </feature>
         </config-file>
-        <framework src="com.payabbhi:payabbhi-android:1.0.6" />
+        <framework src="com.payabbhi:payabbhi-android:1.0.7" />
         <source-file src="src/android/PayabbhiCheckout.java" target-dir="src/com/payabbhi/cordova/" />
     </platform>
 
@@ -34,9 +34,9 @@
         </config-file>
         <source-file src="src/ios/PayabbhiCheckout.swift" />
 
-        <!-- Payabbhi iOS SDK version 1.0.1 for XCode Version 93-->
+        <!-- Payabbhi iOS SDK version 1.0.3 for XCode Version 93-->
         <framework src="src/ios/Payabbhi.framework" custom="true" embed="true"/>
-        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
+        <dependency id="cordova-plugin-add-swift-support" version="1.7.2"/>
     </platform>
 
 
