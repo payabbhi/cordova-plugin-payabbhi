@@ -4,7 +4,7 @@ Change log for Payabbhi Cordova Plugin.
 ## [Unreleased]
 
 ---
-## [1.0.4] - 2020-02-03
+## [1.0.3] - 2020-08-14
 ### Changed
 - Updated ios sdk to 1.0.3 and android SDK to 1.0.7
     
