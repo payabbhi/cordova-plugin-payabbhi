@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-payabbhi",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Payabbhi plugin for cordova/ionic",
   "scripts": {
     "release": "node scripts/release"
@@ -17,12 +17,12 @@
     "org": "payabbhi",
     "deps": {
       "android": {
-        "version": "1.0.6"
+        "version": "1.0.7"
       },
       "ios": {
         "url": "https://github.com/payabbhi/payabbhi-ios/releases",
-        "version": "1.0.1",
-        "xcodeVersion": "93"
+        "version": "1.0.3",
+        "swiftVersion": "50"
       }
     }
   },
@@ -59,6 +59,7 @@
     "moment": "^2.22.2",
     "replace-in-file": "^3.4.2",
     "rmdir-promise": "^1.0.0",
+    "simple-git": "^1.131.0",
     "tar": "^4.4.6"
   }
 }

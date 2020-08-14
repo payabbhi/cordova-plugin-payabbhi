@@ -15,6 +15,7 @@ const octokit  = require('@octokit/rest')();
 const util = require('util');
 const unlink = util.promisify(fs.unlink);
 const git = require('isomorphic-git');
+const simplegit = require('simple-git/promise')(__dirname+'/..');
 
 git.plugins.set('fs', fs);
 
@@ -46,8 +47,8 @@ class Builder {
   }
 
   iosFWPackage() {
-    let xcv = this.shorten(this.config.payabbhi.deps.ios.xcodeVersion)
-    return `Payabbhi-iOS-${xcv}-${this.config.payabbhi.deps.ios.version}.tar.gz`
+    let sftv = this.shorten(this.config.payabbhi.deps.ios.swiftVersion)
+    return `Payabbhi-iOS-${sftv}-${this.config.payabbhi.deps.ios.version}.tar.gz`
   }
 
   iosFWUrl() {
@@ -80,7 +81,7 @@ class Builder {
     this.config.version = this.pluginVersion
     this.config.payabbhi.deps.android.version = this.androidSDKVersion || this.config.payabbhi.deps.android.version 
     this.config.payabbhi.deps.ios.version = this.iosSDKVersion || this.config.payabbhi.deps.ios.version 
-    this.config.payabbhi.deps.ios.xcodeVersion = this.xcodeVersion || this.config.payabbhi.deps.ios.xcodeVersion 
+    this.config.payabbhi.deps.ios.swiftVersion = this.swiftVersion || this.config.payabbhi.deps.ios.swiftVersion 
     fs.writeFileSync('package.json', JSON.stringify(this.config, null, 2))
   }
 
@@ -146,15 +147,7 @@ class Builder {
     await git.add({ dir: root, filepath: 'CHANGELOG.md'})
 
     if ( (sdk === 'ios') || (sdk === 'both') ){
-      await git.add({ dir: root, filepath: 'src/ios/Payabbhi.framework/Headers/Payabbhi.h'})
-      await git.add({ dir: root, filepath: 'src/ios/Payabbhi.framework/Info.plist'})
-      await git.add({ dir: root, filepath: 'src/ios/Payabbhi.framework/Modules/Payabbhi.swiftmodule/arm.swiftmodule'})
-      await git.add({ dir: root, filepath: 'src/ios/Payabbhi.framework/Modules/Payabbhi.swiftmodule/arm64.swiftmodule'})
-      await git.add({ dir: root, filepath: 'src/ios/Payabbhi.framework/Modules/Payabbhi.swiftmodule/i386.swiftmodule'})
-      await git.add({ dir: root, filepath: 'src/ios/Payabbhi.framework/Modules/Payabbhi.swiftmodule/x86_64.swiftmodule'})
-      await git.add({ dir: root, filepath: 'src/ios/Payabbhi.framework/Payabbhi'})
-      await git.add({ dir: root, filepath: 'src/ios/Payabbhi.framework/Payabbhi.storyboardc/PayabbhiViewController.nib'})
-      await git.add({ dir: root, filepath: 'src/ios/Payabbhi.framework/Payabbhi.storyboardc/q1H-70-XDU-view-mkj-ni-ViG.nib'})
+      await simplegit.add('src/ios/Payabbhi.framework/*');
     }
 
     let sha = await git.commit({
@@ -197,10 +190,10 @@ class Builder {
     })
   }
 
-  updateIos(pluginVersion, sdkVersion, xcodeVersion) {
+  updateIos(pluginVersion, sdkVersion, swiftVersion) {
     this.pluginVersion = pluginVersion
     this.iosSDKVersion = sdkVersion
-    this.xcodeVersion = xcodeVersion
+    this.swiftVersion = swiftVersion
   }
 
   updateAndroid(pluginVersion, sdkVersion) {
@@ -242,12 +235,12 @@ class Builder {
 }
  
 program
-  .command('ios <pluginVersion> <sdkVersion> <xcodeVersion> <ghToken>')
+  .command('ios <pluginVersion> <sdkVersion> <swiftVersion> <ghToken>')
   .description('Create a new release with a new iOS SDK version')
-  .action(async function(pluginVersion, sdkVersion, xcodeVersion, ghToken){
+  .action(async function(pluginVersion, sdkVersion, swiftVersion, ghToken){
 
     var builder = new Builder(config, ghToken)
-    builder.updateIos(pluginVersion, sdkVersion, xcodeVersion)
+    builder.updateIos(pluginVersion, sdkVersion, swiftVersion)
     await builder.build('ios')
   });
 
@@ -263,12 +256,12 @@ program
   });
 
 program
-  .command('both <pluginVersion> <iosSdkVersion> <xcodeVersion> <androidSdkVersion> <ghToken>')
+  .command('both <pluginVersion> <iosSdkVersion> <swiftVersion> <androidSdkVersion> <ghToken>')
   .description('Create a new release with new iOS and Android SDK versions')
-  .action(async function(pluginVersion, iosSdkVersion, xcodeVersion, androidSdkVersion, ghToken){
+  .action(async function(pluginVersion, iosSdkVersion, swiftVersion, androidSdkVersion, ghToken){
 
     var builder = new Builder(config, ghToken)
-    builder.updateIos(pluginVersion, iosSdkVersion, xcodeVersion)
+    builder.updateIos(pluginVersion, iosSdkVersion, swiftVersion)
     builder.updateAndroid(pluginVersion, androidSdkVersion)
     await builder.build('both')
   });
