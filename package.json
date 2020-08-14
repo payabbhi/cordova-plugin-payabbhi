@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-payabbhi",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "description": "Payabbhi plugin for cordova/ionic",
   "scripts": {
     "release": "node scripts/release"
